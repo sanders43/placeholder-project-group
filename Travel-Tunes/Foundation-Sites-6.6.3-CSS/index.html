@@ -1,0 +1,50 @@
+
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Tunes</title>
+    <link rel="stylesheet" href="assets/css/foundation.css">
+  </head>
+<body>
+  <h1 class="text-center">Welcome to Travel Tunes!</h1>
+    <!-- Card Container-->
+    <section class="cards-container">
+        <div class="card text-center" style="width: 750px;">
+          <div class="card-divider">
+            <h3>Your epic adventure starts here!</h3>
+            <p><strong>We'll generate a music playlist that lasts the duration of your journey.</strong></p>
+          </div>
+          <img src="assets\images\travel2.jpg">
+          <div class="card-section">
+            <h3>Please enter your travel information.</h3> <br>
+            <form action="">
+              <label class="location text-left"><strong>Current Location</strong></label>
+              <input type="text" placeholder="Where are you starting?">
+              <label class="destination text-left"><strong>Destination</strong></label>
+              <input type="text" placeholder="Where are you going?"> 
+              <input type="submit">
+            </form>
+          </div>
+      </div>
+    </section>
+    <!--Pop-up Modal-->
+    <div class="reveal" id="generator" data-reveal>
+        <h1>Let's start vibing and driving!</h1>
+        <!--Driving Time Reveal and Music Generator Button-->
+        <div class="trip-distance">
+          <div class="generate">
+            <button type="button">Generate Music</button>
+          </div>
+        </div>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div> 
+<script src="assets/js/vendor.js"></script>
+<script src="assets/js/foundation.js"></script>
+</body>
+</html>
+
