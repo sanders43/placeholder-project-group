@@ -32,5 +32,8 @@
   #output {
     font-size: 11px;
   }
+  #result {
+      background-color: white;
+  }
 
       

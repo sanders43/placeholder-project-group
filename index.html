@@ -17,20 +17,21 @@
         <div class="card text-center" style="width: 750px;">
           <div class="card-divider">
             <h3>Your epic adventure starts here!</h3>
-            <p><strong>We'll generate a music playlist that lasts the duration of your journey.</strong></p>
+            <p><strong>We'll generate a music playlist for your trip!</strong></p>
           </div>
           <img src="./assets/images/travel2.jpg">
           <div class="card-section">
             <h3>Please enter your travel information.</h3> <br>
             <form id="travelForm" action="">
-              <label class="location text-left"><strong>Current Location</strong></label>
+              <label class="location text-left"><strong>Start Here!</strong></label>
               <input id="origin" type="text" name="origin" placeholder="Where are you starting?">
-              <label class="destination text-left"><strong>Destination</strong></label>
+              <label class="destination text-left"><strong>Let's Go Somewhere!</strong></label>
               <input id="destination" type="text" name="destination" placeholder="Where are you going?"> 
               <input type="submit">
             </form>
             <div id="result" class="card">
             </div>
+            <button class="button" data-open="generator">Get a playlist!</button>
           </div>
       </div>
     </section>
@@ -38,11 +39,7 @@
     <div class="reveal" id="generator" data-reveal>
         <h1>Let's start vibing and driving!</h1>
         <!--Driving Time Reveal and Music Generator Button-->
-        <div class="trip-distance">
-          <div class="generate">
-            <button type="button">Generate Music</button>
-          </div>
-        </div>
+        <div class="deezer-widget-player" data-src='' data-scrolling="no" data-frameborder="0" data-allowTransparency="true" data-width="700" data-height="350"></div>
         <button class="close-button" data-close aria-label="Close modal" type="button">
           <span aria-hidden="true">&times;</span>
         </button>

@@ -65,8 +65,7 @@ function initMap(origin,destination) {
           var durationTimeSec = duration.value;
           var miles = distanceText.substring(0, distanceText.length - 3);
           var seconds = durationTimeSec;
-          console.log(seconds)
-          $('#result').html("It is " + miles + " miles and " + durationTime + " or " + seconds + " seconds from " + origin + " to " + destination);
+          $('#result').html("It is " + miles + " miles and " + durationTime + " from " + origin + " to " + destination);
         }
       }
     }
@@ -81,6 +80,28 @@ function initMap(origin,destination) {
   });
   
 document.getElementById("map").style.display ="none";
-//AIzaSyChwsrSUtkYSnBjXM3kJrTTexBeki351Fk
+$(document).foundation();
 
-//https://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&mode=bicycling&language=fr-FR&key=AIzaSyChwsrSUtkYSnBjXM3kJrTTexBeki351Fk
+const getArtist = () => {
+   let artist = Math.floor(Math.random()* 1000)
+   return artist;
+}
+
+const generatePlaylist = () => {
+	var w = document[typeof document.getElementsByClassName === 'function' ? 'getElementsByClassName' : 'querySelectorAll']('deezer-widget-player');
+	for (var i = 0, l = w.length; i < l; i++) {
+		w[i].innerHTML = '';
+		var el = document.createElement('iframe');
+		el.src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=007FEB&layout=dark&size=medium&type=radio&id=artist-"+getArtist();+"&app_id=1";
+		el.scrolling = w[i].getAttribute('data-scrolling');
+		el.frameBorder = w[i].getAttribute('data-frameborder');
+		el.setAttribute('frameBorder', w[i].getAttribute('data-frameborder'));
+		el.allowTransparency = w[i].getAttribute('data-allowTransparency');
+		el.width = w[i].getAttribute('data-width');
+		el.height = w[i].getAttribute('data-height');
+		w[i].appendChild(el);
+    }
+};
+
+$('#generator').click(generatePlaylist())
+
