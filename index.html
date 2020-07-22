@@ -26,12 +26,13 @@
               <label class="location text-left"><strong>Start Here!</strong></label>
               <input id="origin" type="text" name="origin" placeholder="Where are you starting?">
               <label class="destination text-left"><strong>Let's Go Somewhere!</strong></label>
-              <input id="destination" type="text" name="destination" placeholder="Where are you going?"> 
+              <input id="destination" type="text" name="destination" placeholder="Where would you like to go?"> 
               <input type="submit">
             </form>
             <div id="result" class="card">
             </div>
-            <button class="button" data-open="generator">Get a playlist!</button>
+            <textarea id="artistChoice" placeholder="Enter Favorite Artist Here">eminem</textarea>
+            <button class="button" id="playlistButton" data-open="generator">Get A Playlist!</button>
           </div>
       </div>
     </section>
@@ -39,7 +40,7 @@
     <div class="reveal" id="generator" data-reveal>
         <h1>Let's start vibing and driving!</h1>
         <!--Driving Time Reveal and Music Generator Button-->
-        <div class="deezer-widget-player" data-src='' data-scrolling="no" data-frameborder="0" data-allowTransparency="true" data-width="700" data-height="350"></div>
+        <div class="deezer-widget-player" data-src="" data-scrolling="no" data-frameborder="0" data-allowTransparency="true" data-width="700" data-height="350"></div>
         <button class="close-button" data-close aria-label="Close modal" type="button">
           <span aria-hidden="true">&times;</span>
         </button>

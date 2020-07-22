@@ -82,17 +82,56 @@ function initMap(origin,destination) {
 document.getElementById("map").style.display ="none";
 $(document).foundation();
 
-const getArtist = () => {
-   let artist = Math.floor(Math.random()* 1000)
-   return artist;
-}
+
+// Fetch data based on query-string
+const getData = async url => {
+	const response = await fetch(url, {
+		method: 'GET',
+		headers: {
+			'x-rapidapi-host': 'deezerdevs-deezer.p.rapidapi.com',
+			'x-rapidapi-key': '38b96fc7b8mshca63f65698d2c0ap1a1759jsnd63f0eb1583e'
+		}
+	});
+
+	if (!response.ok) {
+		throw new Error('Response was not ok.');
+	}
+
+	return await response.json();
+};
+
+// Get search results for artists
+
+
+let trialArtist = $('#artistChoice').val().trim()
+
+
+const searchArtists = async search => {
+	const artists = await getData(
+		`https://deezerdevs-deezer.p.rapidapi.com/search/artist?q=${trialArtist}`
+	);
+
+	if (artists.error) {
+		alert('Could not fetch artists.');
+  }
+  artistId = artists.data[0].id
+  console.log(artistId)
+  return artistId;
+  
+};
+searchArtists();
+
+
+
+$("#playlistButton").click(generatePlaylist())
+
 
 const generatePlaylist = () => {
 	var w = document[typeof document.getElementsByClassName === 'function' ? 'getElementsByClassName' : 'querySelectorAll']('deezer-widget-player');
 	for (var i = 0, l = w.length; i < l; i++) {
 		w[i].innerHTML = '';
 		var el = document.createElement('iframe');
-		el.src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=007FEB&layout=dark&size=medium&type=radio&id=artist-"+getArtist();+"&app_id=1";
+		el.src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=007FEB&layout=dark&size=medium&type=radio&id=artist-"+artistString+"&app_id=1";
 		el.scrolling = w[i].getAttribute('data-scrolling');
 		el.frameBorder = w[i].getAttribute('data-frameborder');
 		el.setAttribute('frameBorder', w[i].getAttribute('data-frameborder'));
@@ -100,8 +139,8 @@ const generatePlaylist = () => {
 		el.width = w[i].getAttribute('data-width');
 		el.height = w[i].getAttribute('data-height');
 		w[i].appendChild(el);
-    }
+	}
 };
 
-$('#generator').click(generatePlaylist())
 
+"https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=007FEB&layout=dark&size=medium&type=radio&id=artist-"+artistString+"&app_id=1";
