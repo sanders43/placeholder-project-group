@@ -1,10 +1,11 @@
+let trialArtist = $('#artistChoice').val().trim()
 
 function initMap(origin,destination) {
     
-    var originInput = document.getElementById('origin');
-    var destinationInput = document.getElementById('destination');
-    var origin = "paducah, Kentucky"
-    var destination = "nashville, Tenneesee"
+    var originInput = $('#origin')[0];
+    var destinationInput = $('#destination')[0];
+    var origin = ""
+    var destination = ""
     
 
     var autocomplete = new google.maps.places.Autocomplete(originInput);
@@ -103,11 +104,9 @@ const getData = async url => {
 // Get search results for artists
 
 
-let trialArtist = $('#artistChoice').val().trim()
-
 
 const searchArtists = async search => {
-	const artists = await getData(
+	let artists = await getData(
 		`https://deezerdevs-deezer.p.rapidapi.com/search/artist?q=${trialArtist}`
 	);
 
@@ -119,19 +118,13 @@ const searchArtists = async search => {
   return artistId;
   
 };
-searchArtists();
-
-
-
-$("#playlistButton").click(generatePlaylist())
-
-
-const generatePlaylist = () => {
+searchArtists().then(function generatePlaylist() {
+  
 	var w = document[typeof document.getElementsByClassName === 'function' ? 'getElementsByClassName' : 'querySelectorAll']('deezer-widget-player');
 	for (var i = 0, l = w.length; i < l; i++) {
 		w[i].innerHTML = '';
 		var el = document.createElement('iframe');
-		el.src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=007FEB&layout=dark&size=medium&type=radio&id=artist-"+artistString+"&app_id=1";
+		el.src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=007FEB&layout=dark&size=medium&type=radio&id=artist-"+artistId+"&app_id=1";
 		el.scrolling = w[i].getAttribute('data-scrolling');
 		el.frameBorder = w[i].getAttribute('data-frameborder');
 		el.setAttribute('frameBorder', w[i].getAttribute('data-frameborder'));
@@ -140,7 +133,14 @@ const generatePlaylist = () => {
 		el.height = w[i].getAttribute('data-height');
 		w[i].appendChild(el);
 	}
-};
+}).catch(err => {
+  alert("Invalid artist choice, Please try again!");
+  return;
+  // process error here
+});
 
 
-"https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=007FEB&layout=dark&size=medium&type=radio&id=artist-"+artistString+"&app_id=1";
+
+
+
+
