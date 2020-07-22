@@ -1,5 +1,25 @@
-let trialArtist = $('#artistChoice').val().trim()
 
+// let user choose artist
+let trialArtist = () => { 
+  let choice = $('#artistChoice').val()
+  console.log(choice)
+  return choice;
+}
+// set chocie of artist on blur
+$("#artistChoice").blur(trialArtist)
+
+
+
+//hide map "necessary for distance matrix and autofill api's"
+$("#map")[0].style.display ="none";
+
+
+
+// initialize foundation framework javascript plugins
+$(document).foundation();
+
+
+// initialize google map
 function initMap(origin,destination) {
     
     var originInput = $('#origin')[0];
@@ -7,35 +27,19 @@ function initMap(origin,destination) {
     var origin = ""
     var destination = ""
     
-
+// implement auto complete api
     var autocomplete = new google.maps.places.Autocomplete(originInput);
     var autocomplete2 = new google.maps.places.Autocomplete(destinationInput);
     autocomplete.setFields(
         ['address_components', 'geometry', 'icon', 'name']);
         autocomplete2.setFields(
             ['address_components', 'geometry', 'icon', 'name']);
-
-    var service = new google.maps.DistanceMatrixService;
-    service.getDistanceMatrix({
-      origins: [origin],
-      destinations: [destination],
-      travelMode: 'DRIVING',
-      unitSystem: google.maps.UnitSystem.IMPERIAL,
-      avoidHighways: false,
-      avoidTolls: false
-    }, function(response, status) {
-      if (status !== 'OK') {
-        alert('Error was: ' + status);
-      } 
-
-      
-    });
-  }
+  };
 
   
-
+//document.ready shorthand
   $(function() {
-
+// fetch distance matrix api
     function calculateDistance(origin, destination) {
       var service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix(
@@ -48,7 +52,7 @@ function initMap(origin,destination) {
         avoidTolls: false
       }, callback);
     }
-  
+  // parse response
     function callback(response, status) {
       if (status != google.maps.DistanceMatrixStatus.OK) {
         $('#result').html(err);
@@ -70,7 +74,7 @@ function initMap(origin,destination) {
         }
       }
     }
-      
+      // submit button sets location values
     $('#travelForm').submit(function(event){
         event.preventDefault();
         var origin = $('#origin').val();
@@ -79,12 +83,9 @@ function initMap(origin,destination) {
     });
    
   });
-  
-document.getElementById("map").style.display ="none";
-$(document).foundation();
 
 
-// Fetch data based on query-string
+// Fetch data 
 const getData = async url => {
 	const response = await fetch(url, {
 		method: 'GET',
@@ -95,7 +96,7 @@ const getData = async url => {
 	});
 
 	if (!response.ok) {
-		throw new Error('Response was not ok.');
+		alert('Response was not ok.');
 	}
 
 	return await response.json();
@@ -103,23 +104,22 @@ const getData = async url => {
 
 // Get search results for artists
 
-
-
 const searchArtists = async search => {
+  console.log(trialArtist)
 	let artists = await getData(
-		`https://deezerdevs-deezer.p.rapidapi.com/search/artist?q=${trialArtist}`
+		`https://deezerdevs-deezer.p.rapidapi.com/search/artist?q=${trialArtist()}`
 	);
 
 	if (artists.error) {
 		alert('Could not fetch artists.');
   }
   artistId = artists.data[0].id
-  console.log(artistId)
   return artistId;
   
 };
+playlistHandler = () => {
 searchArtists().then(function generatePlaylist() {
-  
+  //create iframe with playlist
 	var w = document[typeof document.getElementsByClassName === 'function' ? 'getElementsByClassName' : 'querySelectorAll']('deezer-widget-player');
 	for (var i = 0, l = w.length; i < l; i++) {
 		w[i].innerHTML = '';
@@ -134,12 +134,12 @@ searchArtists().then(function generatePlaylist() {
 		w[i].appendChild(el);
 	}
 }).catch(err => {
+  //process error
   alert("Invalid artist choice, Please try again!");
   return;
-  // process error here
-});
+})};
 
-
+$("#playlistButton").click(playlistHandler);
 
 
 
