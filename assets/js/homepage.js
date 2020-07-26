@@ -1,8 +1,19 @@
-
+$(function loadStorage() {
+    let origin = localStorage.getItem("location")
+    $('#origin').val(origin) 
+    let destination = localStorage.getItem("destination")
+    $("#destination").val(destination) 
+    let lastChoice = localStorage.getItem("artist")
+    $('#artistChoice').val(lastChoice)
+    
+  });
+  
 // let user choose artist
 let trialArtist = () => { 
   let choice = $('#artistChoice').val()
   console.log(choice)
+  let artistValue = $("#artistChoice").val();
+  localStorage.setItem("artist", artistValue)
   return choice;
 }
 // set chocie of artist on blur
@@ -80,6 +91,11 @@ function initMap(origin,destination) {
         var origin = $('#origin').val();
         var destination = $('#destination').val();
         var distanceText = calculateDistance(origin, destination);
+
+let locationValue = $("#origin").val();
+let destinationValue =$("#destination").val();
+        localStorage.setItem("location",locationValue)
+        localStorage.setItem("destination", destinationValue)
     });
    
   });
@@ -139,8 +155,28 @@ searchArtists().then(function generatePlaylist() {
   return;
 })};
 
+const generateRandomPlaylist = () => {
+  let artistId = Math.floor(Math.random()*10000);
+  //create iframe with playlist
+	var w = document[typeof document.getElementsByClassName === 'function' ? 'getElementsByClassName' : 'querySelectorAll']('deezer-widget-player');
+	for (var i = 0, l = w.length; i < l; i++) {
+		w[i].innerHTML = '';
+		var el = document.createElement('iframe');
+		el.src = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=007FEB&layout=dark&size=medium&type=radio&id=artist-"+artistId+"&app_id=1";
+		el.scrolling = w[i].getAttribute('data-scrolling');
+		el.frameBorder = w[i].getAttribute('data-frameborder');
+		el.setAttribute('frameBorder', w[i].getAttribute('data-frameborder'));
+		el.allowTransparency = w[i].getAttribute('data-allowTransparency');
+		el.width = w[i].getAttribute('data-width');
+		el.height = w[i].getAttribute('data-height');
+		w[i].appendChild(el);
+  }
+}
+
 $("#playlistButton").click(playlistHandler);
+$("#randomButton").click(generateRandomPlaylist);
 
 
-
+let locationValue = $("#origin").val();
+let destinationValue =$("#destination").val();
 
