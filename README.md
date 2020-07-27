@@ -18,9 +18,9 @@ I would like to implement the Spotify API after becoming more proficeint with no
 https://sanders43.github.io/travel-tunes-group/
 
 ## Screenshot
-<img src="./assets/images/screenshot1.jpg">
-<img src="./assets/images/screenshot2.jpg">
-<img src="./assets/images/screenshot3.jpg">
+<img src="./assets/images/screenshot1.png">
+<img src="./assets/images/screenshot2.png">
+<img src="./assets/images/screenshot3.png">
 
 
 ## Contribution
