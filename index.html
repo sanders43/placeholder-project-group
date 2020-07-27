@@ -1,11 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <title>Travel Tunes</title>
+    <link rel="stylesheet" href="./assets/css/foundation.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/secondary-style.css"
+  </head>
 <body>
-    
+  <h1 class="text-center">Welcome to Travel Tunes!</h1>
+  <div id="map"></div>
+    <!-- Card Container-->
+    <section class="cards-container">
+        <div class="card text-center" style="width: 750px;">
+          <div class="card-divider">
+            <h3>Your epic adventure starts here!</h3>
+            <p><strong>We'll generate a music playlist for your trip!</strong></p>
+          </div>
+          <img src="./assets/images/travel2.jpg">
+          <div class="card-section">
+            <h3>Please enter your travel information.</h3> <br>
+            <form id="travelForm" action="">
+              <label class="location text-left"><strong>Start Here!</strong></label>
+              <input id="origin" type="text" name="origin" placeholder="Where are you starting?">
+              <label class="destination text-left"><strong>Let's Go Somewhere!</strong></label>
+              <input id="destination" type="text" name="destination" placeholder="Where would you like to go?"> 
+              <button type="submit" class="button">Calculate!</button>
+            </form>
+            <div id="result" class="card">
+            </div>
+            <textarea id="artistChoice" placeholder="Enter Your Favorite Artist Here"></textarea>
+            <button class="button" id="playlistButton" data-open="generator">Get A Playlist!</button>
+            <div></div>
+            <button class="button" id="randomButton" data-open="generator">Random Playlist!</button>
+          </div>
+      </div>
+    </section>
+    <!--Pop-up Modal-->
+    <div class="reveal" id="generator" data-reveal>
+        <h1>Let's start vibing and driving!</h1>
+        <!--Driving Time Reveal and Music Generator Button-->
+        <div class="deezer-widget-player" data-src="" data-scrolling="no" data-frameborder="0" data-allowTransparency="true" data-width="700" data-height="350"></div>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChwsrSUtkYSnBjXM3kJrTTexBeki351Fk&callback=initMap&libraries=places,geometry,visualization,drawing&v=weekly"
+      defer
+    ></script>
+<script src="./assets/js/vendor.js"></script>
+<script src="./assets/js/foundation.js"></script>
+<script src="./assets/js/homepage.js"></script>
+
 </body>
 </html>
+
